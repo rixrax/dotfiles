@@ -1,0 +1,14 @@
+Project roadmap
+
+Basic idea is to add a list of required features for different releases here.
+
+If a requirement seems too wide or undefined, it should be split into smaller requirements.
+
+0.1
+[ ] Begin roadmap
+[ ] Add license
+[ ] Add readme
+[ ] Install script
+[ ] Git config
+
+
