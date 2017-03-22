@@ -1,0 +1,31 @@
+# This is Git's per-user configuration file.
+# This file is part of rixrax/dotfiles.
+[user]
+# Please adapt and uncomment the following lines:
+#   name = Username
+#   email = username@localhost
+
+[core]
+    editor = vim
+    autocrlf = input
+    safecrlf = false
+    excludesFile = ~/.dotfiles/git/.gitignore
+
+[push]
+    default = simple
+
+[alias]
+    s = status
+    a = add
+    aa = add --all
+    c = commit
+    d = diff
+    br = branch
+    brm = branch --merged
+    bd = branch -d
+    bdd = branch -D
+    co = checkout
+    aliases = !git config --get-regexp 'alias.*' | sed 's/[ ]/ = /'
+
+[include]
+    path = ~/.local.gitconfig
