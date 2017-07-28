@@ -12,6 +12,14 @@ If a requirement seems too wide or undefined, it should be split into smaller re
 [x] Git config
 
 0.2
+[ ] Bash config
+-[x] PS1 prompt
+-[x] History
+-[ ] Aliases
+-[ ] Enviromental vars
+-[ ] Path
+
+0.3
 [ ] General vim config
 [ ] Vim plugin config
 
