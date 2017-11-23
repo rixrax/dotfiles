@@ -1,0 +1,184 @@
+"--Basics--
+
+"Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf',  { 'dir': '~/.fzf' }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-surround'
+Plug 'thinca/vim-localrc'
+call plug#end()
+
+"Set VIM mode
+set nocompatible
+
+set rtp+=~/.vim/after
+
+nmap <F12> :PlugInstall<CR>
+
+"Syntax highlighting
+syntax on
+
+"Filetype based indenting
+filetype plugin indent on
+
+"In english please
+let $LANG = 'en_US'
+set encoding=utf-8
+
+"No mouse
+set mouse=""
+
+"Colorscheme
+color desert
+
+"Tabconfig
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set smarttab
+
+"Longer history
+set history=300
+
+
+"--Navigation stuff--
+
+"Keep cursor in place after joining lines
+nnoremap J mzJ`z
+
+"Set up and down to move by row, not by line
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+"Enable backspacing past the beginning of insert operation
+set backspace=indent,eol,start
+
+
+"--Visual stuff--
+
+"Set scrolloff
+set scrolloff=3
+
+"Set wordwrap to only break on whitespace
+set linebreak
+
+"Set text width
+set breakat=80
+
+"Enable mode indicator
+set showmode
+
+"Enable moving outside line endings
+set virtualedit=block
+
+"Show linenumbers
+set numberwidth=5
+
+
+"--Statusline stuff--
+
+"Set status line display to always
+set laststatus=2
+
+"Construct statusline
+"Set to empty
+set statusline=
+"Buffer number
+set statusline+=%-3.3n\
+"Filename
+set statusline+=%f\
+"Flags (help, modified, readonly, preview)
+set statusline+=%h%m%r%w
+"Filetype
+set statusline+=\[%{strlen(&ft)?&ft:'none'}]
+"Separate left and right aligned items
+set statusline+=%=
+"Hex value of character under cursor
+set statusline+=0x%-8B
+"Cursor location (line, column, virtual column)
+set statusline+=%-14(%l,%c%V%)
+"Percentage location in file
+set statusline+=%<%P
+
+"Set ruler for <C-G>
+set ruler
+
+
+"--Searching--
+
+"Highlight searches
+set hlsearch
+
+"Set incremental search
+set incsearch
+
+"Use smartcase on searching
+set smartcase
+
+"Set shell like filename autocompletion
+set wildmode=longest,list
+
+
+"--Misc--
+
+"Change bell sound to screen flash
+set visualbell
+
+
+"--Mappings--
+
+"Follow links on non US keyboard
+nnoremap <CR> <C-]>
+
+"Use <F11> to clear last search highlights
+nnoremap <F11> :noh<CR><Esc>
+
+"Map <Space> to <Leader>
+map <Space> <Leader>
+
+"Toggle line numbers
+nmap <Leader>n :set nu!<CR>
+
+"Smart home (and bind <C-h> to <Home>)
+function! SmartHome()
+    let first_nonblank= match(getline('.'), '\S') + 1
+    if first_nonblank == 0
+        return col('.') + 1 >= col('$') ? '0' : '^'
+    endif
+    if col('.') == first_nonblank
+        return '0'
+    endif
+    return &wrap && wincol() > 1 ? 'g^' : '^'
+endfunction
+noremap <expr> <silent> <Home> SmartHome()
+imap <silent> <Home> <C-O><Home>
+nmap <C-h> <Home>
+imap <silent> <C-h> <C-O><Home>
+vmap <C-h> <Home>
+
+"Bind <C-l> to <End>
+nmap <C-l> <End>
+imap <silent> <C-l> <C-O><End>
+vmap <C-l> <End>
+
+"Bind <C-j> to <PageDown>
+nmap <C-j> <PageDown>
+
+"Bind <C-k> to <PageUp>
+nmap <C-k> <PageUp>
+
+"Quick esc
+imap jk <Esc>
+imap kj <Esc>
+
+"Find
+nmap <C-p> :Files<Return>
+
+"--Autocommands--
+
+"Remove trailing whitespace from file before saving
+"@TODO Set this to only work on specific filetypes
+autocmd BufWritePre * :%s/\s\+$//e
+

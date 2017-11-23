@@ -1,3 +1,4 @@
 /backup/*
 !/backup/README.txt
-
+/vim/autoload/
+/vim/plugged/
