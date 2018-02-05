@@ -15,9 +15,8 @@ If a requirement seems too wide or undefined, it should be split into smaller re
 [ ] Bash config
 -[x] PS1 prompt
 -[x] History
--[ ] Aliases
--[ ] Enviromental vars
--[ ] Path
+-[x] Aliases
+-[x] Enviromental vars and path
 
 0.3
 [ ] General vim config
