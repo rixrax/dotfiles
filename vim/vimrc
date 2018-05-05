@@ -2,10 +2,13 @@
 
 "Plugins
 call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-plug'
 Plug 'junegunn/fzf',  { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'thinca/vim-localrc'
+Plug 'joonty/vim-phpqa', { 'on': [] }
+Plug 'StanAngeloff/php.vim', { 'on': [] }
 call plug#end()
 
 "Set VIM mode
