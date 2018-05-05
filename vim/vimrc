@@ -185,3 +185,35 @@ nmap <C-p> :Files<Return>
 "@TODO Set this to only work on specific filetypes
 autocmd BufWritePre * :%s/\s\+$//e
 
+"Load local .vimsettings files
+"Thanks to /u/kornerstoane @ reddit.com
+function! ApplyLocalSettings(dirname)
+    " don't try to walk a remote directory tree -- takes too long, too many
+    " what if's
+    let l:netrwprotocol = strpart(a:dirname, 0, stridx(a:dirname, "://"))
+    if l:netrwprotocol != ""
+        return
+    endif
+
+    " convert windows paths to unix style (they still work)
+    let l:curdir = substitute(a:dirname, "\\", "/", "g")
+
+    " walk up to the top of the directory tree
+    let l:parentdir = strpart(l:curdir, 0, strridx(l:curdir, "/"))
+    if isdirectory(l:parentdir)
+        call ApplyLocalSettings(l:parentdir)
+    endif
+
+    " now walk back down the path and source .vimsettings as you find them. this
+    " way child directories can 'inherit' from their parents
+    let l:settingsfile = a:dirname . "/.vimsettings"
+    if filereadable(l:settingsfile)
+        exec ":source " . l:settingsfile
+    endif
+endfunction
+autocmd! bufenter * call ApplyLocalSettings(expand("<afile>:p:h"))
+
+"Source local vimrc if available
+if filereadable("~/.local.vimrc")
+    exec ":source ~/.local.vimrc"
+endif
