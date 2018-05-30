@@ -1,9 +1,8 @@
 # This is Git's per-user configuration file.
 # This file is part of rixrax/dotfiles.
 [user]
-# Please adapt and uncomment the following lines:
-#   name = Username
-#   email = username@localhost
+    name = rixrax
+    email = rixrax@users.noreply.github.com
 
 [core]
     editor = vim
