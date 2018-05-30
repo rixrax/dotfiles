@@ -10,14 +10,19 @@ if [[ -f "$HOME_DIR/.gitconfig" && ! -L "$HOME_DIR/.gitconfig" ]]; then
     cp "$HOME_DIR/.gitconfig" "$DOTFILES_DIR/backup/.gitconfig"
     rm "$HOME_DIR/.gitconfig"
 fi
-#Create symlink
+
 if [[ ! -L "$HOME_DIR/.gitconfig" ]]; then
+    echo "Setting git config"
+    #Create symlink
     ln -sn "$DOTFILES_DIR/git/.gitconfig" "$HOME_DIR/.gitconfig"
 fi
 
 #Vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [[ ! -f "$HOME_DIR/.vim/autoload/plug.vim" ]]; then
+    echo "junegunn/vim-plug not found, downloading from github master..."
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 if [[ -f "$HOME_DIR/.vimrc" && ! -L "$HOME_DIR/.vimrc" ]]; then
     #Backup vim config file
@@ -28,8 +33,24 @@ if [[ -f "$HOME_DIR/.vimrc" && ! -L "$HOME_DIR/.vimrc" ]]; then
 fi
 
 if [[ ! -L "$HOME_DIR/.vimrc" ]]; then
+    echo "Setting vim config"
     #Create symlink
     ln -sn "$DOTFILES_DIR/vim/vimrc" "$HOME_DIR/.vimrc"
+    vim +PlugInstall +qall
 fi
-vim +PlugInstall +qall
+
+#Tmux
+if [[ -f "$HOME_DIR/.tmux.conf" && ! -L "$HOME_DIR/.tmux.conf" ]]; then
+    #Backup tmux config file
+    #Notify user
+    echo "Found existing tmux config file, moving it to $DOTFILES_DIR/backup/"
+    cp "$HOME_DIR/.tmux.conf" "$DOTFILES_DIR/backup/.tmux.conf"
+    rm "$HOME_DIR/.tmux.conf"
+fi
+
+if [[ ! -L "$HOME_DIR/.tmux.conf" ]]; then
+    echo "Setting tmux config"
+    #Create symlink
+    ln -sn "$DOTFILES_DIR/tmux/tmux.conf" "$HOME_DIR/.tmux.conf"
+fi
 
