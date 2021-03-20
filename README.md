@@ -8,7 +8,9 @@ This project uses the MIT license, for details please see LICENSE.txt.
 
 ## Installation - bash
 
-$ mkdir ~/dotfiles
-$ cd ~/dotfiles && git clone git://github.com/rixrax/dotfiles .
+``` bash
+$ mkdir ~/.dotfiles
+$ cd ~/.dotfiles && git clone github.com/rixrax/dotfiles .
 $ ./install.sh
+```
 
