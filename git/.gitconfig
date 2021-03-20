@@ -19,11 +19,15 @@
     aa = add --all
     c = commit
     d = diff
+    ba = branch --all
     br = branch
     brm = branch --merged
     bd = branch -d
     bdd = branch -D
     co = checkout
+    fs = !git fetch && git status
+    logg = log --oneline --graph
+    rpo = remote prune origin
     aliases = !git config --get-regexp 'alias.*' | sed 's/[ ]/ = /'
 
 [include]
